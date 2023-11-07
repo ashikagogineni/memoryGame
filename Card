@@ -1,1 +1,17 @@
-
+public class Card {
+	private int value;
+	private boolean faceUp = false;
+	
+	public Card() {
+		
+	}
+	
+	public void print() {
+		if (faceUp) {
+			System.out.print(value);
+		}
+		else {
+			System.out.print("*");
+		}
+	}
+}
