@@ -1,1 +1,14 @@
+private static boolean hasDuplicateDigits(String input) {
+    for (int i = 0; i < input.length(); i++) {
+        char currentDigit = input.charAt(i);
 
+        for (int j = i + 1; j < input.length(); j++) {
+            if (currentDigit == input.charAt(j)) {
+                return true; // found a duplicate
+            }
+        }
+    }
+
+    return false; // no duplicates found
+}
+}
