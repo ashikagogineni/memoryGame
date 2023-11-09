@@ -1,14 +1,16 @@
-private static boolean hasDuplicateDigits(String input) {
-    for (int i = 0; i < input.length(); i++) {
-        char currentDigit = input.charAt(i);
 
-        for (int j = i + 1; j < input.length(); j++) {
-            if (currentDigit == input.charAt(j)) {
-                return true; // found a duplicate
-            }
+
+public String generateUniqueList(int n){
+    String list = "";
+    int rand = (int)(Math.random()*n+1);
+    String randomNum = ""+ rand;
+    list +=randomNum;
+    while(list.length()<n) {
+        rand = (int)(Math.random()*n+1);
+        randomNum = ""+ rand;
+        if(list.indexOf(randomNum)==-1) { 
+            list+=randomNum;
         }
     }
-
-    return false; // no duplicates found
-}
+    System.out.println("list: " + list);
 }
