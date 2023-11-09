@@ -8,11 +8,12 @@ public class Card {
 	 * Assigns the card's row and column, assigns a random value between 0 and 3 (inclusive) for the card.
 	 * @param c - column that the card is on
 	 * @param r - row that the card is on
+	 * @param newValue - value assigned at given (r,c)
 	 */
-	public Card(int c, String r) {
+	public Card(int c, String r, int newValue) {
 		column = c;
 		row = r;
-		value = (int) (Math.random() * 4);
+		value = newValue;
 	}
 	/**
 	 * Returns the value of the card.
