@@ -1,14 +1,21 @@
 public class gameBoard{
-
+    private int numColumns;
+    private int numRows;
+    private int column;
+    private int row;
     public gameBoard(){
-
+        numColumns = 3;
+        numRows = 2;
+        column = 1;
+        row = 1;
+    }
     /**
     * Returns a unique list of n values for half the board
     * @param n - number of values generated
     * @return - a list of n unique values
     */
     
-    public String generateUniqueList(int n){
+    public static String assignValues(int n){
         String list = "";
         int rand = (int)(Math.random()*n+1);
         String randomNum = ""+ rand;
@@ -22,4 +29,7 @@ public class gameBoard{
         }
         return list;
     }
+    public static void setColumn(){
+        assignValues(numColumns);
+        
 }
