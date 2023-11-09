@@ -3,7 +3,19 @@ public class Card {
 	private boolean faceUp = false;
 	
 	public Card() {
-		
+		value = (int) (Math.random() * 4);
+	}
+	
+	public int getValue() {
+		return value;
+	}
+	
+	public void flip() {
+		faceUp = true;
+	}
+	
+	public void flipBack() {
+		faceUp = false;
 	}
 	
 	public void print() {
