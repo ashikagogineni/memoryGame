@@ -1,20 +1,25 @@
-/**
-* Returns a unique list of n values for half the board
-* @param n - number of values generated
-* @return - a list of n unique values
-*/
+public class gameBoard{
 
-public String generateUniqueList(int n){
-    String list = "";
-    int rand = (int)(Math.random()*n+1);
-    String randomNum = ""+ rand;
-    list +=randomNum;
-    while(list.length()<n) {
-        rand = (int)(Math.random()*n+1);
-        randomNum = ""+ rand;
-        if(list.indexOf(randomNum)==-1) { 
-            list+=randomNum;
+    public gameBoard(){
+
+    /**
+    * Returns a unique list of n values for half the board
+    * @param n - number of values generated
+    * @return - a list of n unique values
+    */
+    
+    public String generateUniqueList(int n){
+        String list = "";
+        int rand = (int)(Math.random()*n+1);
+        String randomNum = ""+ rand;
+        list +=randomNum;
+        while(list.length()<n) {
+            rand = (int)(Math.random()*n+1);
+            randomNum = ""+ rand;
+            if(list.indexOf(randomNum)==-1) { 
+                list+=randomNum;
+            }
         }
+        return list;
     }
-    return list;
 }
