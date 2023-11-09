@@ -1,37 +1,60 @@
-package memoryGame;
-
 public class Card {
 	private int value;
 	private boolean faceUp = false;
-	private String row;
-	private int column;
+	private String row; // row the card is on (a or b)
+	private int column; // column the card is on (1, 2, or 3)
 	
+	/**
+	 * Assigns the card's row and column, assigns a random value between 0 and 3 (inclusive) for the card.
+	 * @param c - column that the card is on
+	 * @param r - row that the card is on
+	 */
 	public Card(int c, String r) {
 		column = c;
 		row = r;
 		value = (int) (Math.random() * 4);
 	}
-	
+	/**
+	 * Returns the value of the card.
+	 * @return - value of card
+	 */
 	public int getValue() {
 		return value;
 	}
 	
+	/**
+	 * Returns the row that the card is on.
+	 * @return - row that the card is on
+	 */
 	public String getRow() {
 		return row;
 	}
 	
+	/**
+	 * Returns the column that the card is on.
+	 * @return - column that the card is on
+	 */
 	public int getColumn() {
 		return column;
 	}
 	
+	/**
+	 * Flips the card face-up.
+	 */
 	public void flip() {
 		faceUp = true;
 	}
 	
+	/**
+	 * Flips the card face-down.
+	 */
 	public void flipBack() {
 		faceUp = false;
 	}
 	
+	/**
+	 * Prints out the value of the card if it is face up, or an asterisk if it is face down.
+	 */
 	public void print() {
 		if (faceUp) {
 			System.out.print(value);
