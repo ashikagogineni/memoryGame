@@ -1,13 +1,27 @@
+package memoryGame;
+
 public class Card {
 	private int value;
 	private boolean faceUp = false;
+	private String row;
+	private int column;
 	
-	public Card() {
+	public Card(int c, String r) {
+		column = c;
+		row = r;
 		value = (int) (Math.random() * 4);
 	}
 	
 	public int getValue() {
 		return value;
+	}
+	
+	public String getRow() {
+		return row;
+	}
+	
+	public int getColumn() {
+		return column;
 	}
 	
 	public void flip() {
