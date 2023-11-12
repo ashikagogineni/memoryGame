@@ -1,1 +1,96 @@
+package memoryGame;
+
+import java.util.Arrays;
+import java.util.Random;
+
+public class memoryGameBoard {
+    private memoryGamePiece[][] board;  // 2D array representing the game board
+    private static final int ROWS = 4;
+    private static final int COLS = 5;
+
+    // Constructor
+    public memoryGameBoard() {
+        board = new memoryGamePiece[ROWS][COLS];
+        initializeBoard();
+    }
+
+    //  Initialize the game board with random values
+    private void initializeBoard() {
+        Random random = new Random();
+
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLS; j++) {
+                // Calculate the value for each position (0 to (ROWS * COLS / 2 - 1))
+                int value = (i * COLS + j) % (ROWS * COLS / 2);
+                board[i][j] = new memoryGamePiece(value);
+            }
+        }
+
+        // Shuffle the board
+        for (int i = ROWS - 1; i > 0; i--) {
+            for (int j = COLS - 1; j > 0; j--) {
+                int m = random.nextInt(i + 1);
+                int n = random.nextInt(j + 1);
+
+                // Swap board[i][j] with board[m][n]
+                memoryGamePiece temp = board[i][j];
+                board[i][j] = board[m][n];
+                board[m][n] = temp;
+            }
+        }
+    }
+
+
+    // Print the current game board
+    public void printBoard() {
+        printBoard(-1, -1);  // Assuming -1 indicates no selected row and column
+    }
+
+    public void printBoard(int selectedRow, int selectedCol) {
+        for (int i = 0; i < ROWS; i++) {
+            for (int j = 0; j < COLS; j++) {
+                memoryGamePiece piece = board[i][j];
+                
+                if (i == selectedRow && j == selectedCol) {
+                    if (piece.isRevealed()) {
+                        System.out.print(piece.getValue() + " ");
+                    } else {
+                        System.out.print("* ");
+                    }
+                } else {
+                    if (piece.isRevealed()) {
+                        System.out.print(piece.getValue() + " ");
+                    } else {
+                        System.out.print("* ");
+                    }
+                }
+            }
+            System.out.println();
+        }
+    }
+
+    // Reveals a specific card on the board
+    public void revealCard(int row, int col) {
+        memoryGamePiece piece = board[row][col];
+        piece.reveal();
+    }
+
+    // Checks if two cards have the same value
+    public boolean checkMatch(int row1, int col1, int row2, int col2) {
+        memoryGamePiece piece1 = board[row1][col1];
+        memoryGamePiece piece2 = board[row2][col2];
+        return piece1.getValue() == piece2.getValue();
+    }
+    
+    // Getter for the board field
+    public memoryGamePiece[][] getBoard() {
+        return board;
+    }
+    
+    public void hideCard(int row, int col) {
+        memoryGamePiece piece = board[row][col];
+        piece.hide();
+    }
+}
+
 
