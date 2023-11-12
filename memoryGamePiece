@@ -1,1 +1,33 @@
+package memoryGame;
+
+public class memoryGamePiece {
+    private int value;  // The value (0-9) of the card
+    private boolean revealed;  // Indicates if the card is revealed or not
+
+    // Constructor
+    public memoryGamePiece(int value) {
+        this.value = value;
+        this.revealed = false;
+    }
+
+    // Getter for value
+    public int getValue() {
+        return value;
+    }
+
+    // Getter for revealed
+    public boolean isRevealed() {
+        return revealed;
+    }
+
+    // Reveals the card
+    public void reveal() {
+        revealed = true;
+    }
+
+    // Method to hide the card
+    public void hide() {
+        revealed = false;
+    }
+}
 
