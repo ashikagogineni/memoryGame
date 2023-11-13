@@ -15,7 +15,7 @@ public class gameBoard{
     * @return - a list of n unique values
     */
     
-    public static String assignValues(int n){
+    public String assignValues(int n){
         String list = "";
         int rand = (int)(Math.random()*n+1);
         String randomNum = ""+ rand;
@@ -29,7 +29,7 @@ public class gameBoard{
         }
         return list;
     }
-    public static void setCard(){
+    public void setCard(){
         Card card1 = new Card(column, row, assignValues(numColumns).substring(0,1));
     }    
 }
