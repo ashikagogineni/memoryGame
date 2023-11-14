@@ -1,7 +1,7 @@
 package memoryGame;
 
-//Shrishti Roy
 /**
+ *Shrishti Roy
  * The MemoryGame class contains the main method to start the game.
  */
 public class MemoryGame {
@@ -18,8 +18,8 @@ package memoryGame;
 
 import java.util.Scanner;
 
-// Shrishti Roy
 /**
+ *Shrishti Roy
  * The GameBoard class represents the game board and its functionalities.
  */
 public class GameBoard {
@@ -45,8 +45,9 @@ public class GameBoard {
         return displayBoard;
     }
 
-    //Ashika Gogineni
+    
     /**
+     * Ashika Gogineni
      * Flips the card at the specified position on the board.
      * @param board The current state of the board.
      * @param position The position of the card to flip (1-20).
@@ -92,8 +93,9 @@ public class GameBoard {
         score++;
     }
 
-    // Arshia Gupta
+ 
     /**
+     * Arshia Gupta
      * Reads a valid position input from the user.
      * @param scanner Scanner object to read user input.
      * @return Valid position input (1-20).
@@ -116,8 +118,8 @@ package memoryGame;
 
 import java.util.Scanner;
 
-//Eleanor Yang
 /**
+ * Eleanor Yang
  * The Cards class is used for revealing the numbers.
  */
 public class Cards {
@@ -151,8 +153,9 @@ public class Cards {
 
 package memoryGame;
 
-// Eleanor Yang
+
 /**
+ * Eleanor Yang
  * The Display class handles how the game board looks. 
  */
 public class Display {
