@@ -1,12 +1,14 @@
 package memoryGame;
 
-import java.util.Scanner;
-
 public class MemoryGame {
     public static void main(String[] args) {
         GameDriver.startGame();
     }
 }
+
+package memoryGame;
+
+import java.util.Scanner;
 
 class GameBoard {
     private static final String BOARD =
@@ -73,6 +75,8 @@ class GameBoard {
     }
 }
 
+package memoryGame;
+
 class Board {
     private static final int COLS = 5;
 
@@ -88,32 +92,35 @@ class Board {
     }
 }
 
+package memoryGame;
+
+import java.util.Scanner;
+
 class GameDriver {
     static void startGame() {
-        GameBoard game = new GameBoard();
         Scanner scanner = new Scanner(System.in);
-        String displayBoard = game.initializeDisplayBoard();
+        String displayBoard = GameBoard.initializeDisplayBoard();
 
-        while (game.getScore() < (game.ROWS * game.COLS) / 2) {
+        while (GameBoard.getScore() < (GameBoard.ROWS * GameBoard.COLS) / 2) {
             Board.displayBoard(displayBoard);
 
-            int pos1 = game.readValidPosition(scanner);
-            displayBoard = game.flipCards(displayBoard, pos1, true);
+            int pos1 = GameBoard.readValidPosition(scanner);
+            displayBoard = GameBoard.flipCards(displayBoard, pos1, true);
             Board.displayBoard(displayBoard);
 
-            int pos2 = game.readValidPosition(scanner);
-            displayBoard = game.flipCards(displayBoard, pos2, true);
+            int pos2 = GameBoard.readValidPosition(scanner);
+            displayBoard = GameBoard.flipCards(displayBoard, pos2, true);
 
-            if (game.cardsMatch(pos1, pos2)) {
+            if (GameBoard.cardsMatch(pos1, pos2)) {
                 System.out.println("Match! You get a point.");
-                game.incrementScore();
+                GameBoard.incrementScore();
             } else {
                 System.out.println("No match. Try again.");
-                displayBoard = game.flipCards(displayBoard, pos1, false);
-                displayBoard = game.flipCards(displayBoard, pos2, false);
+                displayBoard = GameBoard.flipCards(displayBoard, pos1, false);
+                displayBoard = GameBoard.flipCards(displayBoard, pos2, false);
             }
         }
 
-        System.out.println("Congratulations! You've matched all the cards. Your score: " + game.getScore());
+        System.out.println("Congratulations! You've matched all the cards. Your score: " + GameBoard.getScore());
     }
 }
