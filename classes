@@ -1,5 +1,12 @@
-// Driver Class
+// MemoryGame Class
+/**
+ * The main class to initiate and run the Memory Game.
+ */
 public class MemoryGame {
+    /**
+     * Initiates the Memory Game by creating a GameBoard object and starting the game.
+     * @param args Command line arguments (unused)
+     */
     public static void main(String[] args) {
         GameBoard gameBoard = new GameBoard();
         gameBoard.playGame();
@@ -9,16 +16,25 @@ public class MemoryGame {
 // GameBoard Class
 import java.util.Scanner;
 
+/**
+ * Represents the game board and its functionalities.
+ */
 public class GameBoard {
     private final int ROWS = 4;
     private final int COLS = 5;
     private int score = 0;
     private final Board board;
 
+    /**
+     * Initializes a GameBoard object and creates an associated Board.
+     */
     public GameBoard() {
         this.board = new Board();
     }
 
+    /**
+     * Initiates and runs the memory game loop.
+     */
     public void playGame() {
         Scanner scanner = new Scanner(System.in);
         board.initializeDisplayBoard();
@@ -46,6 +62,11 @@ public class GameBoard {
         System.out.println("Congratulations! You've matched all the cards. Your score: " + score);
     }
 
+    /**
+     * Reads and validates the position input entered by the player.
+     * @param scanner Scanner object to read input
+     * @return Validated position entered by the player
+     */
     private int readValidPosition(Scanner scanner) {
         int position;
         do {
@@ -62,6 +83,9 @@ public class GameBoard {
 }
 
 // Board Class
+/**
+ * Represents the game board containing cards.
+ */
 public class Board {
     private static final String BOARD =
             "01234" +
@@ -71,6 +95,9 @@ public class Board {
 
     private final Card[][] cards = new Card[4][5];
 
+    /**
+     * Initializes the display board with Card objects.
+     */
     public void initializeDisplayBoard() {
         int k = 0;
         for (int i = 0; i < 4; i++) {
@@ -80,6 +107,9 @@ public class Board {
         }
     }
 
+    /**
+     * Displays the current state of the game board.
+     */
     public void displayBoard() {
         System.out.println("\nCurrent Board:");
         for (int i = 0; i < 4; i++) {
@@ -91,6 +121,11 @@ public class Board {
         System.out.println();
     }
 
+    /**
+     * Reveals or hides the card at the specified position based on the 'reveal' parameter.
+     * @param position The position of the card to be revealed or hidden
+     * @param reveal Boolean value to determine if the card should be revealed or hidden
+     */
     public void flipCards(int position, boolean reveal) {
         int row = (position - 1) / 5;
         int col = (position - 1) % 5;
@@ -103,6 +138,12 @@ public class Board {
         }
     }
 
+    /**
+     * Checks if the cards at two positions match.
+     * @param pos1 Position of the first card
+     * @param pos2 Position of the second card
+     * @return True if the cards at the given positions match, otherwise False
+     */
     public boolean cardsMatch(int pos1, int pos2) {
         int row1 = (pos1 - 1) / 5;
         int col1 = (pos1 - 1) % 5;
@@ -114,24 +155,43 @@ public class Board {
 }
 
 // Card Class
+/**
+ * Represents an individual card in the game.
+ */
 public class Card {
     private char cardValue;
     private boolean revealed;
 
+    /**
+     * Constructs a Card object with a default value and hidden state.
+     * @param cardValue The initial value of the card
+     */
     public Card(int cardValue) {
         this.cardValue = '*';
         this.revealed = false;
     }
 
+    /**
+     * Retrieves the current value of the card.
+     * @return The current value of the card
+     */
     public char getCardValue() {
         return cardValue;
     }
 
+    /**
+     * Sets the value of the card and reveals it.
+     * @param cardValue The value to set for the card
+     */
     public void setCardValue(char cardValue) {
         this.cardValue = cardValue;
         this.revealed = true;
     }
 
+    /**
+     * Checks if the card is revealed.
+     * @return True if the card is revealed, otherwise False
+     */
     public boolean isRevealed() {
         return revealed;
     }
