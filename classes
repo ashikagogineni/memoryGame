@@ -2,7 +2,7 @@ package memoryGame;
 
 public class MemoryGame {
     public static void main(String[] args) {
-        GameDriver.startGame();
+        Cards.startGame();
     }
 }
 
@@ -77,36 +77,19 @@ class GameBoard {
 
 package memoryGame;
 
-class Board {
-    private static final int COLS = 5;
-
-    static void displayBoard(String board) {
-        System.out.println("\nCurrent Board:");
-        for (int i = 0; i < board.length(); i++) {
-            if (i > 0 && i % COLS == 0) {
-                System.out.println();
-            }
-            System.out.print(board.charAt(i) + " ");
-        }
-        System.out.println();
-    }
-}
-
-package memoryGame;
-
 import java.util.Scanner;
 
-class GameDriver {
+class Cards {
     static void startGame() {
         Scanner scanner = new Scanner(System.in);
         String displayBoard = GameBoard.initializeDisplayBoard();
 
         while (GameBoard.getScore() < (GameBoard.ROWS * GameBoard.COLS) / 2) {
-            Board.displayBoard(displayBoard);
+            Display.displayBoard(displayBoard);
 
             int pos1 = GameBoard.readValidPosition(scanner);
             displayBoard = GameBoard.flipCards(displayBoard, pos1, true);
-            Board.displayBoard(displayBoard);
+            Display.displayBoard(displayBoard);
 
             int pos2 = GameBoard.readValidPosition(scanner);
             displayBoard = GameBoard.flipCards(displayBoard, pos2, true);
@@ -122,5 +105,22 @@ class GameDriver {
         }
 
         System.out.println("Congratulations! You've matched all the cards. Your score: " + GameBoard.getScore());
+    }
+}
+
+package memoryGame;
+
+class Display {
+    private static final int COLS = 5;
+
+    static void displayBoard(String board) {
+        System.out.println("\nCurrent Board:");
+        for (int i = 0; i < board.length(); i++) {
+            if (i > 0 && i % COLS == 0) {
+                System.out.println();
+            }
+            System.out.print(board.charAt(i) + " ");
+        }
+        System.out.println();
     }
 }
