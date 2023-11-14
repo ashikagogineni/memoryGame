@@ -31,17 +31,20 @@ public class gameBoard1 {
 
             System.out.print("\nEnter the position of the first card (count 123..etc. from the start): ");
             int pos1 = scanner.nextInt();
+            displayBoard = flipCards(displayBoard, pos1, true); // Reveal the number in the selected position
+
             System.out.print("\nEnter the position of the second card (count 123..etc. from the start): ");
             int pos2 = scanner.nextInt();
-
-            displayBoard = flipCards(displayBoard, pos1);
-            displayBoard = flipCards(displayBoard, pos2);
+            displayBoard = flipCards(displayBoard, pos2, true); // Reveal the number in the selected position
 
             if (cardsMatch(pos1, pos2)) {
                 System.out.println("Match! You get a point.");
                 score++;
             } else {
                 System.out.println("No match. Try again.");
+                // If no match, hide the revealed numbers
+                displayBoard = flipCards(displayBoard, pos1, false);
+                displayBoard = flipCards(displayBoard, pos2, false);
             }
         }
 
@@ -65,16 +68,22 @@ public class gameBoard1 {
         return displayBoard.toString();
     }
 
-    public static String flipCards(String board, int position) {
+    public static String flipCards(String board, int position, boolean reveal) {
         int row = (position - 1) / COLS;
         int col = (position - 1) % COLS;
         int index = row * (2 * COLS) + col * 2 + 2;
-        return board.substring(0, index) + BOARD.charAt(index) + board.substring(index + 1);
-    }
 
-    public static char getCardAtPosition(int position) {
-        int index = (position - 1) * 2;
-        return BOARD.charAt(index);
+        if (reveal) {
+            char cardValue = BOARD.charAt(position * 2 - 2); // Get the number in the selected position
+            board = board.substring(0, index) + cardValue + board.substring(index + 1);
+        } else {
+            // If not revealing, hide the number
+            board = board.substring(0, index) + "* " + board.substring(index + 2);
+        }
+
+        displayBoard(board);
+
+        return board;
     }
 
     public static boolean cardsMatch(int pos1, int pos2) {
