@@ -1,0 +1,138 @@
+// Driver Class
+public class MemoryGame {
+    public static void main(String[] args) {
+        GameBoard gameBoard = new GameBoard();
+        gameBoard.playGame();
+    }
+}
+
+// GameBoard Class
+import java.util.Scanner;
+
+public class GameBoard {
+    private final int ROWS = 4;
+    private final int COLS = 5;
+    private int score = 0;
+    private final Board board;
+
+    public GameBoard() {
+        this.board = new Board();
+    }
+
+    public void playGame() {
+        Scanner scanner = new Scanner(System.in);
+        board.initializeDisplayBoard();
+        board.displayBoard();
+
+        while (score < (ROWS * COLS) / 2) {
+            int pos1 = readValidPosition(scanner);
+            board.flipCards(pos1, true);
+            board.displayBoard();
+
+            int pos2 = readValidPosition(scanner);
+            board.flipCards(pos2, true);
+            board.displayBoard();
+
+            if (board.cardsMatch(pos1, pos2)) {
+                System.out.println("Match! You get a point.");
+                score++;
+            } else {
+                System.out.println("No match. Try again.");
+                board.flipCards(pos1, false);
+                board.flipCards(pos2, false);
+            }
+        }
+
+        System.out.println("Congratulations! You've matched all the cards. Your score: " + score);
+    }
+
+    private int readValidPosition(Scanner scanner) {
+        int position;
+        do {
+            System.out.print("Enter a position (1-20): ");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Please enter a valid number.");
+                scanner.next();
+            }
+            position = scanner.nextInt();
+        } while (position < 1 || position > 20);
+
+        return position;
+    }
+}
+
+// Board Class
+public class Board {
+    private static final String BOARD =
+            "01234" +
+            "56789" +
+            "01234" +
+            "56789";
+
+    private final Card[][] cards = new Card[4][5];
+
+    public void initializeDisplayBoard() {
+        int k = 0;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 5; j++) {
+                cards[i][j] = new Card(k++);
+            }
+        }
+    }
+
+    public void displayBoard() {
+        System.out.println("\nCurrent Board:");
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 5; j++) {
+                System.out.print(cards[i][j].getCardValue() + " ");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+    public void flipCards(int position, boolean reveal) {
+        int row = (position - 1) / 5;
+        int col = (position - 1) % 5;
+
+        if (reveal && !cards[row][col].isRevealed()) {
+            char cardValue = BOARD.charAt(position - 1);
+            cards[row][col].setCardValue(cardValue);
+        } else {
+            cards[row][col].setCardValue('*');
+        }
+    }
+
+    public boolean cardsMatch(int pos1, int pos2) {
+        int row1 = (pos1 - 1) / 5;
+        int col1 = (pos1 - 1) % 5;
+        int row2 = (pos2 - 1) / 5;
+        int col2 = (pos2 - 1) % 5;
+
+        return cards[row1][col1].getCardValue() == cards[row2][col2].getCardValue();
+    }
+}
+
+// Card Class
+public class Card {
+    private char cardValue;
+    private boolean revealed;
+
+    public Card(int cardValue) {
+        this.cardValue = '*';
+        this.revealed = false;
+    }
+
+    public char getCardValue() {
+        return cardValue;
+    }
+
+    public void setCardValue(char cardValue) {
+        this.cardValue = cardValue;
+        this.revealed = true;
+    }
+
+    public boolean isRevealed() {
+        return revealed;
+    }
+}
