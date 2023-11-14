@@ -1,0 +1,74 @@
+import java.util.Scanner;
+public class gameBoard1 {
+	    private static final String BOARD =
+	            "0 1 2 3 4\n" +
+	            "5 6 7 8 9\n" +
+	            "0 1 2 3 4\n" +
+	            "5 6 7 8 9";
+
+	    private static int score = 0;
+
+	    public static void main(String[] args) {
+	        playGame();
+	    }
+
+	    public static void displayBoard(String board) {
+	        System.out.println("\nCurrent Board:");
+	        System.out.println(board);
+	    }
+
+	    public static void playGame() {
+	    	Scanner scanner = new Scanner(System.in);
+
+	        while (score < BOARD.length() / 2) {
+	            String displayBoard = initializeDisplayBoard();
+	            displayBoard(displayBoard);
+
+	            System.out.print("\nEnter the position of the first card (count 123..etc. from the start): ");
+	            int pos1 = scanner.nextInt();
+	            System.out.print("\nEnter the position of the second card (count 123..etc. from the start): ");
+	            int pos2 = scanner.nextInt();
+
+	            displayBoard = flipCards(displayBoard, pos1);
+	            displayBoard = flipCards(displayBoard, pos2);
+
+	            if (cardsMatch(pos1, pos2)) {
+	                System.out.println("Match! You get a point.");
+	                score++;
+	            } else {
+	                System.out.println("No match. Try again.");
+	            }
+	        }
+
+	        System.out.println("Congratulations! You've matched all the cards. Your score: " + score);
+	    }
+
+	    public static String initializeDisplayBoard() {
+	    	String displayBoard = "";
+	        for (int i = 0; i < BOARD.length(); i++) {
+	            char currentChar = BOARD.charAt(i);
+	            if (Character.isDigit(currentChar)) {
+	                displayBoard += "* ";
+	            } else {
+	                displayBoard += currentChar + "";
+	            }
+	        }
+	        return displayBoard;
+	    }
+	    
+	    public static String flipCards(String board, int position) {
+	    	int row = (position - 1) / 5;
+	        int col = (position - 1) % 5;
+	        int index = row * 12 + col * 2 + 2;
+	        return board.substring(0, index) + BOARD.charAt(index) + board.substring(index + 1);
+	    }
+	    
+	    public static char getCardAtPosition(int position) {
+	        int index = (position - 1) * 2;
+	        return BOARD.charAt(index);
+	    }
+
+	    public static boolean cardsMatch(int pos1, int pos2) {
+	        return BOARD.charAt((pos1 - 1) * 2) == BOARD.charAt((pos2 - 1) * 2);
+	    }
+	}
